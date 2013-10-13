@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 
-namespace GameLib
+namespace XnaGameLib
 {
     public class PhysicsObject
     {

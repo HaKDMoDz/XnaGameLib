@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Diagnostics;
 
-namespace GameLib
+namespace XnaGameLib
 {
 	public class AnimatedSprite<T> : PhysicsObject, IDrawable
 	{

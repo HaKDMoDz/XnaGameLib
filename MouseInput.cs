@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameLib
+namespace XnaGameLib
 {
     public class MouseInput : IUpdatable
     {

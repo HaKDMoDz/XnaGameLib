@@ -2,9 +2,9 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameLib
+namespace XnaGameLib
 {
-    public class InputDevices : Updatable
+    public class InputDevices : IUpdatable
     {
         private KeyboardState keyboardState;
         private KeyboardState lastKeyboardState;
@@ -52,7 +52,7 @@ namespace GameLib
             get { return lastGamePadStates; }
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
 		{
 			lastKeyboardState = keyboardState;
 			keyboardState = Keyboard.GetState();
@@ -141,16 +141,12 @@ namespace GameLib
 			{
 			case MouseButtons.LeftButton:
 				return mouseState.LeftButton == state;
-				break;
 			case MouseButtons.RightButton:
 				return mouseState.RightButton == state;
-				break;
 			case MouseButtons.MiddleButton:
 				return mouseState.MiddleButton == state;
-				break;
 			default:
 				return false;
-				break;
 			}
 		}
 
@@ -160,16 +156,12 @@ namespace GameLib
 			{
 			case MouseButtons.LeftButton:
 				return lastMouseState.LeftButton == lastState && mouseState.LeftButton == state;
-				break;
 			case MouseButtons.RightButton:
 				return lastMouseState.RightButton == lastState && mouseState.RightButton == state;
-				break;
 			case MouseButtons.MiddleButton:
 				return lastMouseState.MiddleButton == lastState && mouseState.MiddleButton == state;
-				break;
 			default:
 				return false;
-				break;
 			}
 		}
     }

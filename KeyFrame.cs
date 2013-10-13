@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 
-namespace GameLib
+namespace XnaGameLib
 {
 	public struct KeyFrame
 	{

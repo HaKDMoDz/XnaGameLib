@@ -1,6 +1,6 @@
 using System;
 
-namespace GameLib
+namespace XnaGameLib
 {
 	public enum MouseButtons
 	{

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace GameLib
+namespace XnaGameLib
 {
 	public static class AnimationHelper
 	{

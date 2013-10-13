@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{62CD8733-08EF-46B8-B836-DE7346DF201D}</ProjectGuid>
+    <ProjectGuid>{9CB32C1E-0110-4E10-B9A6-13870AA3872D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>GameLib</RootNamespace>
-    <AssemblyName>GameLib</AssemblyName>
+    <RootNamespace>XnaGameLib</RootNamespace>
+    <AssemblyName>XnaGameLib</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,41 +30,35 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Tao.Sdl">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Linux\Release\Tao.Sdl.dll</HintPath>
-    </Reference>
-    <Reference Include="Lidgren.Network">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Linux\Release\Lidgren.Network.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Linux\Release\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>..\..\MonoGame\MonoGame.Framework\bin\Linux\Release\OpenTK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="BoundingCircle.cs" />
-    <Compile Include="PlayerInput.cs" />
-    <Compile Include="MouseButtons.cs" />
-    <Compile Include="MouseInput.cs" />
-    <Compile Include="KeyboardInput.cs" />
-    <Compile Include="GamePadInput.cs" />
-    <Compile Include="PhysicsObject.cs" />
-    <Compile Include="Particle.cs" />
-    <Compile Include="ParticleEmitter.cs" />
     <Compile Include="AnimatedSprite.cs" />
-    <Compile Include="SpriteSheet.cs" />
-    <Compile Include="UpdateTimer.cs" />
-    <Compile Include="KeyFrame.cs" />
-    <Compile Include="IUpdatable.cs" />
-    <Compile Include="IDrawable.cs" />
     <Compile Include="Animation.cs" />
     <Compile Include="AnimationHelper.cs" />
+    <Compile Include="BoundingCircle.cs" />
     <Compile Include="Debugging.cs" />
+    <Compile Include="GamePadInput.cs" />
+    <Compile Include="IDrawable.cs" />
+    <Compile Include="InputDevices.cs" />
+    <Compile Include="IUpdatable.cs" />
+    <Compile Include="KeyboardInput.cs" />
+    <Compile Include="KeyFrame.cs" />
+    <Compile Include="MouseButtons.cs" />
+    <Compile Include="MouseInput.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="ParticleEmitter.cs" />
+    <Compile Include="PhysicsObject.cs" />
+    <Compile Include="PlayerInput.cs" />
+    <Compile Include="SpriteSheet.cs" />
+    <Compile Include="UpdateTimer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="LICENSE" />
+    <None Include="README.md" />
+  </ItemGroup>
 </Project>

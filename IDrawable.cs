@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameLib
+namespace XnaGameLib
 {
 	public interface IDrawable
 	{
