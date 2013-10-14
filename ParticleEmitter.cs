@@ -92,7 +92,7 @@ namespace XnaGameLib
         {
             Texture2D texture = Textures[_Random.Next(Textures.Count)];
             Vector2 textureOrigin = UseTextureCenterAsOrigin ? new Vector2(texture.Width / 2, texture.Height / 2) : TextureOriginOffset;
-            Color tint = new Color(_Random.Next(256), _Random.Next(256), _Random.Next(256));
+            //Color tint = new Color(_Random.Next(256), _Random.Next(256), _Random.Next(256));
             double ttl = RandomDouble(MinTtl, MaxTtl);
 
             Particle p = new Particle(texture, textureOrigin, Color.White, ttl);           
