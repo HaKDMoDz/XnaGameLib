@@ -6,106 +6,106 @@ namespace XnaGameLib
 {
     public class InputDevices : IUpdatable
     {
-        private KeyboardState keyboardState;
-        private KeyboardState lastKeyboardState;
-		private MouseState mouseState;
-		private MouseState lastMouseState;
-        private GamePadState[] gamePadStates;
-        private GamePadState[] lastGamePadStates;
+        private KeyboardState _keyboardState;
+        private KeyboardState _lastKeyboardState;
+		private MouseState _mouseState;
+		private MouseState _lastMouseState;
+        private GamePadState[] _gamePadStates;
+        private GamePadState[] _lastGamePadStates;
 
         public InputDevices()
         {
-            keyboardState = Keyboard.GetState();
-			mouseState = Mouse.GetState();
-            gamePadStates = new GamePadState[Enum.GetValues(typeof(PlayerIndex)).Length];
+            _keyboardState = Keyboard.GetState();
+			_mouseState = Mouse.GetState();
+            _gamePadStates = new GamePadState[Enum.GetValues(typeof(PlayerIndex)).Length];
             foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex)))
-                gamePadStates[(int)index] = GamePad.GetState(index);
+                _gamePadStates[(int)index] = GamePad.GetState(index);
         }
 
         public KeyboardState KeyboardState
         {
-            get { return keyboardState; }
+            get { return _keyboardState; }
         }
 
         public KeyboardState LastKeyboardState
         {
-            get { return lastKeyboardState; }
+            get { return _lastKeyboardState; }
         }
 
         public MouseState MouseState
         {
-            get { return mouseState; }
+            get { return _mouseState; }
         }
 
         public MouseState LastMouseState
         {
-            get { return lastMouseState; }
+            get { return _lastMouseState; }
         }
 
         public GamePadState[] GamePadStates
         {
-            get { return gamePadStates; }
+            get { return _gamePadStates; }
         }
 
         public GamePadState[] LastGamePadStates
         {
-            get { return lastGamePadStates; }
+            get { return _lastGamePadStates; }
         }
 
         public void Update(GameTime gameTime)
 		{
-			lastKeyboardState = keyboardState;
-			keyboardState = Keyboard.GetState();
+			_lastKeyboardState = _keyboardState;
+			_keyboardState = Keyboard.GetState();
 
-			lastMouseState = mouseState;
-			mouseState = Mouse.GetState();
+			_lastMouseState = _mouseState;
+			_mouseState = Mouse.GetState();
 
-			lastGamePadStates = (GamePadState[])gamePadStates.Clone();
+			_lastGamePadStates = (GamePadState[])_gamePadStates.Clone();
 			foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex))) {
-				gamePadStates [(int)index] = GamePad.GetState(index);
+				_gamePadStates [(int)index] = GamePad.GetState(index);
 			}
         }
 
         public bool KeyDown(Keys key)
         {
-            return keyboardState.IsKeyDown(key);
+            return _keyboardState.IsKeyDown(key);
         }
 
 		public bool KeyUp(Keys key)
         {
-            return keyboardState.IsKeyUp(key);
+            return _keyboardState.IsKeyUp(key);
         }
 
         public bool KeyReleased(Keys key)
         {
-			return lastKeyboardState.IsKeyDown(key) && keyboardState.IsKeyUp(key);
+			return _lastKeyboardState.IsKeyDown(key) && _keyboardState.IsKeyUp(key);
         }
 
         public bool KeyPressed(Keys key)
         {
-			return lastKeyboardState.IsKeyUp(key) && keyboardState.IsKeyDown(key);
+			return _lastKeyboardState.IsKeyUp(key) && _keyboardState.IsKeyDown(key);
         }
 
 		public bool ButtonUp(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonUp(button);
+            return _gamePadStates[(int)index].IsButtonUp(button);
         }
 
 		public bool ButtonDown(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonDown(button);
+            return _gamePadStates[(int)index].IsButtonDown(button);
         }
 
         public bool ButtonReleased(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonUp(button) &&
-                lastGamePadStates[(int)index].IsButtonDown(button);
+            return _gamePadStates[(int)index].IsButtonUp(button) &&
+                _lastGamePadStates[(int)index].IsButtonDown(button);
         }
 
         public bool ButtonPressed(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonDown(button) &&
-                lastGamePadStates[(int)index].IsButtonUp(button);
+            return _gamePadStates[(int)index].IsButtonDown(button) &&
+                _lastGamePadStates[(int)index].IsButtonUp(button);
         }
 
 		public bool MouseButtonUp(MouseButtons button)
@@ -130,9 +130,9 @@ namespace XnaGameLib
 
 		public void Reset()
         {
-            lastKeyboardState = keyboardState;
-			lastMouseState = mouseState;
-			lastGamePadStates = (GamePadState[]) gamePadStates.Clone();
+            _lastKeyboardState = _keyboardState;
+			_lastMouseState = _mouseState;
+			_lastGamePadStates = (GamePadState[]) _gamePadStates.Clone();
         }
 
 		private bool MouseButtonIs(MouseButtons button, ButtonState state)
@@ -140,11 +140,11 @@ namespace XnaGameLib
 			switch (button)
 			{
 			case MouseButtons.LeftButton:
-				return mouseState.LeftButton == state;
+				return _mouseState.LeftButton == state;
 			case MouseButtons.RightButton:
-				return mouseState.RightButton == state;
+				return _mouseState.RightButton == state;
 			case MouseButtons.MiddleButton:
-				return mouseState.MiddleButton == state;
+				return _mouseState.MiddleButton == state;
 			default:
 				return false;
 			}
@@ -155,11 +155,11 @@ namespace XnaGameLib
 			switch (button)
 			{
 			case MouseButtons.LeftButton:
-				return lastMouseState.LeftButton == lastState && mouseState.LeftButton == state;
+				return _lastMouseState.LeftButton == lastState && _mouseState.LeftButton == state;
 			case MouseButtons.RightButton:
-				return lastMouseState.RightButton == lastState && mouseState.RightButton == state;
+				return _lastMouseState.RightButton == lastState && _mouseState.RightButton == state;
 			case MouseButtons.MiddleButton:
-				return lastMouseState.MiddleButton == lastState && mouseState.MiddleButton == state;
+				return _lastMouseState.MiddleButton == lastState && _mouseState.MiddleButton == state;
 			default:
 				return false;
 			}

@@ -6,9 +6,8 @@ namespace XnaGameLib
 {
 	public class SpriteSheet
 	{
-		private Texture2D texture;
-		private int rectangleWidth;
-		private int rectangleHeight;
+		private int _rectangleWidth;
+		private int _rectangleHeight;
 
 		public SpriteSheet(Texture2D texture, int rows, int columns)
 		{
@@ -17,9 +16,8 @@ namespace XnaGameLib
 			Debug.Assert(columns > 0);
 			Debug.Assert(texture.Height % rows == 0);
 			Debug.Assert(texture.Width % columns == 0);
-			this.texture = texture;
-			rectangleWidth = texture.Width / columns;
-			rectangleHeight = texture.Height / rows;
+			_rectangleWidth = texture.Width / columns;
+			_rectangleHeight = texture.Height / rows;
 		}
 
 		public Rectangle this[int row, int column] {
@@ -27,8 +25,8 @@ namespace XnaGameLib
 			{
 				Debug.Assert(row >= 0);
 				Debug.Assert(column >= 0);
-				return new Rectangle(column * rectangleWidth, row * rectangleHeight,
-			                         rectangleWidth, rectangleHeight);
+				return new Rectangle(column * _rectangleWidth, row * _rectangleHeight,
+			                         _rectangleWidth, _rectangleHeight);
 			}
 		}
 	}

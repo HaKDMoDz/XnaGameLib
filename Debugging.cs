@@ -8,21 +8,21 @@ namespace XnaGameLib
 {
 	public static class Debugging
 	{
-		private static Texture2D boundingCircleTexture;
+		private static Texture2D _BoundingCircleTexture;
 
 		[Conditional("DEBUG")]
         public static void LoadContent(ContentManager content, string boundingCircleAssetName)
         {
-			boundingCircleTexture = content.Load<Texture2D>(boundingCircleAssetName);
+			_BoundingCircleTexture = content.Load<Texture2D>(boundingCircleAssetName);
         }
 
 		[Conditional("DEBUG")]
 		public static void Draw(SpriteBatch spriteBatch, BoundingCircle circle)
 		{
-			Rectangle textureBounds = boundingCircleTexture.Bounds;
+			Rectangle textureBounds = _BoundingCircleTexture.Bounds;
 			Vector2 origin = new Vector2(textureBounds.Width / 2, textureBounds.Height / 2);
-			float scale = (circle.Radius * 2.0f) / boundingCircleTexture.Width;
-			spriteBatch.Draw(boundingCircleTexture, circle.Position, textureBounds,
+			float scale = (circle.Radius * 2.0f) / _BoundingCircleTexture.Width;
+			spriteBatch.Draw(_BoundingCircleTexture, circle.Position, textureBounds,
 			                 Color.White, 0, origin, scale, SpriteEffects.None, 1.0f);
 		}
 	}

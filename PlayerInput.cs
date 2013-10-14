@@ -6,12 +6,12 @@ namespace XnaGameLib
 {
 	public class PlayerInput<T> : IUpdatable
 	{
-		private KeyboardInput keyboard;
-		private GamePadInput gamePad;
-		private MouseInput mouse;
-		private Dictionary<T, Keys> actionKeys = new Dictionary<T, Keys>();
-		private Dictionary<T, Buttons> actionButtons = new Dictionary<T, Buttons>();
-		private Dictionary<T, MouseButtons> actionMouseButtons = new Dictionary<T, MouseButtons>();
+		private KeyboardInput _keyboard;
+		private GamePadInput _gamePad;
+		private MouseInput _mouse;
+		private Dictionary<T, Keys> _actionKeys = new Dictionary<T, Keys>();
+		private Dictionary<T, Buttons> _actionButtons = new Dictionary<T, Buttons>();
+		private Dictionary<T, MouseButtons> _actionMouseButtons = new Dictionary<T, MouseButtons>();
 
 		private delegate bool KeyTest(Keys key);
 		private delegate bool ButtonTest(Buttons button, PlayerIndex index);
@@ -19,72 +19,72 @@ namespace XnaGameLib
 
 		public PlayerInput(KeyboardInput keyboard, GamePadInput gamePad, MouseInput mouse)
 		{
-			this.keyboard = keyboard;
-			this.gamePad = gamePad;
-			this.mouse = mouse;
+			_keyboard = keyboard;
+			_gamePad = gamePad;
+			_mouse = mouse;
 		}
 
 		public void SetKey(T action, Keys key)
 		{
-			actionKeys[action] = key;
+			_actionKeys[action] = key;
 		}
 
 		public void SetButton(T action, Buttons button)
 		{
-			actionButtons[action] = button;
+			_actionButtons[action] = button;
 		}
 
 		public void SetMouseButton(T action, MouseButtons mouseButtons)
 		{
-			actionMouseButtons[action] = mouseButtons;
+			_actionMouseButtons[action] = mouseButtons;
 		}
 
 		public void Update(GameTime gameTime)
 		{
-			keyboard.Update(gameTime);
-			gamePad.Update(gameTime);
-			mouse.Update(gameTime);
+			_keyboard.Update(gameTime);
+			_gamePad.Update(gameTime);
+			_mouse.Update(gameTime);
 		}
 
         public bool InputOn(T action, PlayerIndex index = PlayerIndex.One)
 		{
-			return InputTest(action, keyboard.KeyDown, gamePad.ButtonDown, mouse.ButtonDown, index);
+			return InputTest(action, _keyboard.KeyDown, _gamePad.ButtonDown, _mouse.ButtonDown, index);
         }
 
 		public bool InputOff(T action, PlayerIndex index = PlayerIndex.One)
         {
-			return InputTest(action, keyboard.KeyUp, gamePad.ButtonUp, mouse.ButtonUp, index);
+			return InputTest(action, _keyboard.KeyUp, _gamePad.ButtonUp, _mouse.ButtonUp, index);
         }
 
         public bool InputDeactivated(T action, PlayerIndex index = PlayerIndex.One)
         {
-			return InputTest(action, keyboard.KeyReleased, gamePad.ButtonReleased, mouse.ButtonReleased, index);
+			return InputTest(action, _keyboard.KeyReleased, _gamePad.ButtonReleased, _mouse.ButtonReleased, index);
         }
 
         public bool InputActivated(T action, PlayerIndex index = PlayerIndex.One)
         {
-			return InputTest(action, keyboard.KeyPressed, gamePad.ButtonPressed, mouse.ButtonPressed, index);
+			return InputTest(action, _keyboard.KeyPressed, _gamePad.ButtonPressed, _mouse.ButtonPressed, index);
         }
 
 		private bool InputTest(T action, KeyTest keyTest, ButtonTest buttonTest,
 		                       MouseButtonTest mouseButtonTest, PlayerIndex index = PlayerIndex.One)
 		{
 			Keys key;
-			if (actionKeys.TryGetValue(action, out key)) {
+			if (_actionKeys.TryGetValue(action, out key)) {
 				if (keyTest(key)) {
 					return true;
 				}
 			}
 
 			Buttons button;
-			if (actionButtons.TryGetValue(action, out button)) {
+			if (_actionButtons.TryGetValue(action, out button)) {
 				if (buttonTest(button, index)) {
 					return true;
 				}
 			}
 
 			MouseButtons mouseButton;
-			if (actionMouseButtons.TryGetValue(action, out mouseButton)) {
+			if (_actionMouseButtons.TryGetValue(action, out mouseButton)) {
 				if (mouseButtonTest(mouseButton)) {
 					return true;
 				}

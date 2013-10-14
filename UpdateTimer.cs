@@ -25,19 +25,19 @@ namespace XnaGameLib
 
 		public event TimerEventHandler TimerFired;
 
-		private long ticksElapsed;
-		private long ticksUntilFire;
-		private long ticksInPeriod;
-		private UpdateTimer.Type type;
-		private bool isRunning;
+		private long _ticksElapsed;
+		private long _ticksUntilFire;
+		private long _ticksInPeriod;
+		private UpdateTimer.Type _type;
+		private bool _isRunning;
 
 		public UpdateTimer(long ticks, UpdateTimer.Type type, TimerEventHandler timeEventHandler = null)
 		{
-			ticksElapsed = 0;
-			ticksUntilFire = ticks;
-			ticksInPeriod = ticks;
-			this.type = type;
-			isRunning = true;
+			_ticksElapsed = 0;
+			_ticksUntilFire = ticks;
+			_ticksInPeriod = ticks;
+			_type = type;
+			_isRunning = true;
 
 			if (timeEventHandler != null)
 			{
@@ -54,17 +54,17 @@ namespace XnaGameLib
 		{
 			if (IsRunning())
 			{
-				ticksElapsed += gameTime.ElapsedGameTime.Ticks;
-				ticksUntilFire -= gameTime.ElapsedGameTime.Ticks;
+				_ticksElapsed += gameTime.ElapsedGameTime.Ticks;
+				_ticksUntilFire -= gameTime.ElapsedGameTime.Ticks;
 
-				if (ticksUntilFire <= 0)
+				if (_ticksUntilFire <= 0)
 				{
-					if (type == UpdateTimer.Type.Repeating)
+					if (_type == UpdateTimer.Type.Repeating)
 					{
-						ticksUntilFire += ticksInPeriod;
+						_ticksUntilFire += _ticksInPeriod;
 					} else
 					{
-						isRunning = false;
+						_isRunning = false;
 					}
 
 					OnTimerFired();
@@ -74,19 +74,19 @@ namespace XnaGameLib
 
 		public bool IsRunning()
 		{
-			return isRunning;
+			return _isRunning;
 		}
 
 		public bool IsRunningSlowly()
 		{
-			return IsRunning() && ticksUntilFire <= 0;
+			return IsRunning() && _ticksUntilFire <= 0;
 		}
 
 		private void OnTimerFired()
 		{
 			if (TimerFired != null)
 			{
-				TimerFired(this, new TimerEventArgs(new TimeSpan(ticksElapsed)));
+				TimerFired(this, new TimerEventArgs(new TimeSpan(_ticksElapsed)));
 			}
 		}
 	}

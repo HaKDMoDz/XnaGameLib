@@ -6,55 +6,55 @@ namespace XnaGameLib
 {
     public class GamePadInput : IUpdatable
     {
-        private GamePadState[] gamePadStates;
-        private GamePadState[] lastGamePadStates;
+        private GamePadState[] _gamePadStates;
+        private GamePadState[] _lastGamePadStates;
 
         public GamePadInput()
         {
-            lastGamePadStates = new GamePadState[Enum.GetValues(typeof(PlayerIndex)).Length];
+            _lastGamePadStates = new GamePadState[Enum.GetValues(typeof(PlayerIndex)).Length];
             foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex)))
-                lastGamePadStates[(int)index] = GamePad.GetState(index);
-			gamePadStates = (GamePadState[]) lastGamePadStates.Clone();
+                _lastGamePadStates[(int)index] = GamePad.GetState(index);
+			_gamePadStates = (GamePadState[]) _lastGamePadStates.Clone();
         }
 
         public GamePadState[] GamePadStates
         {
-            get { return gamePadStates; }
+            get { return _gamePadStates; }
         }
 
         public GamePadState[] LastGamePadStates
         {
-            get { return lastGamePadStates; }
+            get { return _lastGamePadStates; }
         }
 
         public void Update(GameTime gameTime)
 		{
-			lastGamePadStates = (GamePadState[]) gamePadStates.Clone();
+			_lastGamePadStates = (GamePadState[]) _gamePadStates.Clone();
 			foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex))) {
-				gamePadStates [(int)index] = GamePad.GetState(index);
+				_gamePadStates [(int)index] = GamePad.GetState(index);
 			}
         }
 
 		public bool ButtonUp(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonUp(button);
+            return _gamePadStates[(int)index].IsButtonUp(button);
         }
 
 		public bool ButtonDown(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonDown(button);
+            return _gamePadStates[(int)index].IsButtonDown(button);
         }
 
         public bool ButtonReleased(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonUp(button) &&
-                lastGamePadStates[(int)index].IsButtonDown(button);
+            return _gamePadStates[(int)index].IsButtonUp(button) &&
+                _lastGamePadStates[(int)index].IsButtonDown(button);
         }
 
         public bool ButtonPressed(Buttons button, PlayerIndex index)
         {
-            return gamePadStates[(int)index].IsButtonDown(button) &&
-                lastGamePadStates[(int)index].IsButtonUp(button);
+            return _gamePadStates[(int)index].IsButtonDown(button) &&
+                _lastGamePadStates[(int)index].IsButtonUp(button);
         }
     }
 }

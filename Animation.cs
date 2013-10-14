@@ -8,7 +8,7 @@ namespace XnaGameLib
 {
 	public class Animation : IUpdatable
 	{
-		private static readonly Random random = new Random();
+		private static readonly Random _Random = new Random();
 		public enum AnimationState
 		{
 			Stopped,
@@ -18,27 +18,27 @@ namespace XnaGameLib
 		}
 
 		public AnimationState State { get; protected set; }
-		private AnimationState lastState;
-		private List<KeyFrame> keyFrames;
-		private UpdateTimer timer;
-		private long ticksToNextFrame;
-		private int index;
+		private AnimationState _lastState;
+		private List<KeyFrame> _keyFrames;
+		private UpdateTimer _timer;
+		private long _ticksToNextFrame;
+		private int _index;
 
 		public Animation(List<KeyFrame> keyFrames)
 		{
 			Debug.Assert(keyFrames != null);
 			Debug.Assert(keyFrames.Count > 0);
-			this.keyFrames = keyFrames;
+			_keyFrames = keyFrames;
 			State = AnimationState.Stopped;
-			ticksToNextFrame = 0;
-			index = 0;
+			_ticksToNextFrame = 0;
+			_index = 0;
 		}
 
 		public void Play(bool randomStartFrame = false)
 		{
-			index = (randomStartFrame ? random.Next(keyFrames.Count) : 0);
-			timer = new UpdateTimer(keyFrames[index].Duration, UpdateTimer.Type.Once, TimerFired);
-			ticksToNextFrame = keyFrames[index].Duration.Ticks;
+			_index = (randomStartFrame ? _Random.Next(_keyFrames.Count) : 0);
+			_timer = new UpdateTimer(_keyFrames[_index].Duration, UpdateTimer.Type.Once, TimerFired);
+			_ticksToNextFrame = _keyFrames[_index].Duration.Ticks;
 			State = AnimationState.Playing;
 		}
 
@@ -52,7 +52,7 @@ namespace XnaGameLib
 		{
 			if (State == AnimationState.Paused)
 			{
-				State = lastState;
+				State = _lastState;
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace XnaGameLib
 		{
 			if (State == AnimationState.Playing || State == AnimationState.Looping)
 			{
-				lastState = State;
+				_lastState = State;
 				State = AnimationState.Paused;
 			}
 		}
@@ -68,21 +68,21 @@ namespace XnaGameLib
 		public void Stop()
 		{
 			State = AnimationState.Stopped;
-			ticksToNextFrame = keyFrames[0].Duration.Ticks;
-			index = 0;
+			_ticksToNextFrame = _keyFrames[0].Duration.Ticks;
+			_index = 0;
 		}
 
 		public void Update(GameTime gameTime)
 		{
 			if (State == AnimationState.Playing || State == AnimationState.Looping)
 			{
-				timer.Update(gameTime);
+				_timer.Update(gameTime);
 			}
 		}
 
 		public KeyFrame GetCurrentKeyFrame()
 		{
-			return keyFrames[index];
+			return _keyFrames[_index];
 		}
 
 		private void TimerFired(object sender, TimerEventArgs args)
@@ -101,34 +101,34 @@ namespace XnaGameLib
 		private void LoopToNextFrame(long ticksElapsed)
 		{
 			Debug.Assert(ticksElapsed >= 0);
-			while (ticksElapsed >= ticksToNextFrame)
+			while (ticksElapsed >= _ticksToNextFrame)
 			{
-				ticksElapsed -= ticksToNextFrame;
-				index = (index + 1) % keyFrames.Count;
-				ticksToNextFrame = keyFrames[index].Duration.Ticks;
+				ticksElapsed -= _ticksToNextFrame;
+				_index = (_index + 1) % _keyFrames.Count;
+				_ticksToNextFrame = _keyFrames[_index].Duration.Ticks;
 			}
 
-			ticksToNextFrame -= ticksElapsed;
-			timer = new UpdateTimer(ticksToNextFrame, UpdateTimer.Type.Once, TimerFired);
+			_ticksToNextFrame -= ticksElapsed;
+			_timer = new UpdateTimer(_ticksToNextFrame, UpdateTimer.Type.Once, TimerFired);
 		}
 
 		private void PlayToNextFrame(long ticksElapsed)
 		{
 			Debug.Assert(ticksElapsed >= 0);
-			while (ticksElapsed >= ticksToNextFrame && index < keyFrames.Count)
+			while (ticksElapsed >= _ticksToNextFrame && _index < _keyFrames.Count)
 			{
-				ticksElapsed -= ticksToNextFrame;
+				ticksElapsed -= _ticksToNextFrame;
 
-				if (++index < keyFrames.Count)
+				if (++_index < _keyFrames.Count)
 				{
-					ticksToNextFrame = keyFrames[index].Duration.Ticks;
+					_ticksToNextFrame = _keyFrames[_index].Duration.Ticks;
 				}
 			}
 
-			if (index < keyFrames.Count)
+			if (_index < _keyFrames.Count)
 			{
-				ticksToNextFrame -= ticksElapsed;
-				timer = new UpdateTimer(ticksToNextFrame, UpdateTimer.Type.Once, TimerFired);
+				_ticksToNextFrame -= ticksElapsed;
+				_timer = new UpdateTimer(_ticksToNextFrame, UpdateTimer.Type.Once, TimerFired);
 			}
 			else
 			{

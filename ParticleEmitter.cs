@@ -8,10 +8,10 @@ namespace XnaGameLib
 {
     public class ParticleEmitter : PhysicsObject
     {
-        private static Random random = new Random();
+        private static readonly Random _Random = new Random();
 
-        private List<Particle> particles;
-        private float timeSinceLastEmission;
+        private List<Particle> _particles;
+        private float _timeSinceLastEmission;
 
         public List<Texture2D> Textures { get; set; }
         public Vector2 TextureOriginOffset { get; set; }
@@ -37,7 +37,7 @@ namespace XnaGameLib
 
         public ParticleEmitter(List<Texture2D> textures)
         {
-            particles = new List<Particle>();
+            _particles = new List<Particle>();
 
             Textures = textures;
             TextureOriginOffset = Vector2.Zero;
@@ -60,7 +60,7 @@ namespace XnaGameLib
             MinTtl = 1000;
             MaxTtl = 1000;
 
-            timeSinceLastEmission = 1f / EmissionRate;
+            _timeSinceLastEmission = 1f / EmissionRate;
         }
 
         public override void Update(GameTime gameTime)
@@ -71,18 +71,18 @@ namespace XnaGameLib
 
             float dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             EmissionRate += EmissionAcceleration * dt;
-            timeSinceLastEmission += dt;
+            _timeSinceLastEmission += dt;
 
-            if (timeSinceLastEmission >= 1f / EmissionRate)
+            if (_timeSinceLastEmission >= 1f / EmissionRate)
             {
                 AddParticle();
-                timeSinceLastEmission = 0;
+                _timeSinceLastEmission = 0;
             }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Particle p in particles)
+            foreach (Particle p in _particles)
             {
                 p.Draw(spriteBatch);
             }
@@ -90,9 +90,9 @@ namespace XnaGameLib
 
         public Particle CreateParticle()
         {
-            Texture2D texture = Textures[random.Next(Textures.Count)];
+            Texture2D texture = Textures[_Random.Next(Textures.Count)];
             Vector2 textureOrigin = UseTextureCenterAsOrigin ? new Vector2(texture.Width / 2, texture.Height / 2) : TextureOriginOffset;
-            Color tint = new Color(random.Next(256), random.Next(256), random.Next(256));
+            Color tint = new Color(_Random.Next(256), _Random.Next(256), _Random.Next(256));
             double ttl = RandomDouble(MinTtl, MaxTtl);
 
             Particle p = new Particle(texture, textureOrigin, Color.White, ttl);           
@@ -114,21 +114,21 @@ namespace XnaGameLib
 
         private void UpdateParticles(GameTime gameTime)
         {
-            for (int i = particles.Count - 1; i >= 0; --i)
+            for (int i = _particles.Count - 1; i >= 0; --i)
             {
-                Particle p = particles[i];
+                Particle p = _particles[i];
                 p.Update(gameTime);
 
                 if (!p.IsActive)
                 {
-                    particles.RemoveAt(i);
+                    _particles.RemoveAt(i);
                 }
             }
         }
 
         private void AddParticle()
         {
-            particles.Add(CreateParticle());
+            _particles.Add(CreateParticle());
         }
 
         private float RandomFloat(float min, float max)
@@ -138,7 +138,7 @@ namespace XnaGameLib
 
         private float RandomDouble(double min, double max)
         {
-            return (float)(min + random.NextDouble() * (max - min));
+            return (float)(min + _Random.NextDouble() * (max - min));
         }
     }
 }
