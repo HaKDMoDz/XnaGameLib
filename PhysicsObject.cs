@@ -7,68 +7,68 @@ namespace XnaGameLib
     public class PhysicsObject
     {
         public Vector2 Position { get; set; }
-        private Vector2 velocity;
+        private Vector2 _velocity;
         public Vector2 Acceleration { get; set; }
-        private float maxSpeed;
+        private float _maxSpeed;
 
-        private float angle;
-        private float angularVelocity;
+        private float _angle;
+        private float _angularVelocity;
         public float AngularAcceleration { get; set; }
-        private float maxAngularSpeed;
+        private float _maxAngularSpeed;
 
         public Vector2 Velocity
         {
-            get { return velocity; }
+            get { return _velocity; }
 
             set
             {
 				Debug.Assert(value.Length() <= MaxSpeed);
-                velocity = value;
+                _velocity = value;
             }
         }
 
         public float MaxSpeed
         {
-            get { return maxSpeed; }
+            get { return _maxSpeed; }
 
             set
             {
                 Debug.Assert(value >= 0);
-                maxSpeed = value;
+                _maxSpeed = value;
             }
         }
 
         public float AngularVelocity
         {
-            get { return angularVelocity; }
+            get { return _angularVelocity; }
 
             set
             {
                 Debug.Assert(Math.Abs(value) <= MaxAngularSpeed);
-                angularVelocity = value;
+                _angularVelocity = value;
             }
         }
 
         public float MaxAngularSpeed
         {
-            get { return maxAngularSpeed; }
+            get { return _maxAngularSpeed; }
 
             set
             {
                 Debug.Assert(value >= 0);
-                maxAngularSpeed = value;
+                _maxAngularSpeed = value;
             }
         }
 
         public float Angle
         {
-            get { return angle; }
+            get { return _angle; }
 
             set
             {
-                angle = value;
-                while (angle < 0) angle += MathHelper.TwoPi;
-                while (angle >= MathHelper.TwoPi) angle -= MathHelper.TwoPi;
+                _angle = value;
+                while (_angle < 0) _angle += MathHelper.TwoPi;
+                while (_angle >= MathHelper.TwoPi) _angle -= MathHelper.TwoPi;
             }
         }
 
@@ -108,14 +108,14 @@ namespace XnaGameLib
             float dt = (float) gameTime.ElapsedGameTime.TotalMilliseconds;
 
             Vector2 initialVelocity = Velocity;
-            velocity += Acceleration * dt;
+            _velocity += Acceleration * dt;
             CapVelocity();
 
             Vector2 displacement = (initialVelocity + Velocity) * 0.5f * dt;
             Position += displacement;
 
             float initialAngularVelocity = AngularVelocity;
-            angularVelocity += AngularAcceleration * dt;
+            _angularVelocity += AngularAcceleration * dt;
             CapAngularVelocity();
 
             Angle += (initialAngularVelocity + AngularVelocity) * 0.5f * dt;
@@ -124,16 +124,16 @@ namespace XnaGameLib
         private void CapVelocity()
         {
             // Avoid square root calculation by comparing squared speeds.
-            float speedSquared = velocity.LengthSquared();
+            float speedSquared = _velocity.LengthSquared();
             if (speedSquared > MaxSpeed * MaxSpeed)
             {
-                velocity *= MaxSpeed / (float) Math.Sqrt(speedSquared);
+                _velocity *= MaxSpeed / (float) Math.Sqrt(speedSquared);
             }
         }
 
         private void CapAngularVelocity()
         {
-            angularVelocity = MathHelper.Clamp(angularVelocity, -MaxAngularSpeed, MaxAngularSpeed);
+            _angularVelocity = MathHelper.Clamp(_angularVelocity, -MaxAngularSpeed, MaxAngularSpeed);
         }
     }
 }
