@@ -8,16 +8,10 @@ namespace XnaGameLib
 {
 	public class Animation : IUpdatable
 	{
-		private static readonly Random _Random = new Random();
-		public enum AnimationState
-		{
-			Stopped,
-			Paused,
-			Playing,
-			Looping
-		}
-
 		public AnimationState State { get; protected set; }
+
+		private static readonly Random _Random = new Random();
+
 		private AnimationState _lastState;
 		private List<KeyFrame> _keyFrames;
 		private UpdateTimer _timer;
@@ -134,6 +128,14 @@ namespace XnaGameLib
 			{
 				Stop();
 			}
+		}
+
+		public enum AnimationState
+		{
+			Stopped,
+			Paused,
+			Playing,
+			Looping
 		}
 	}
 }

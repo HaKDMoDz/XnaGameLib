@@ -12,7 +12,6 @@ namespace XnaGameLib
 		private Dictionary<T, Keys> _actionKeys = new Dictionary<T, Keys>();
 		private Dictionary<T, Buttons> _actionButtons = new Dictionary<T, Buttons>();
 		private Dictionary<T, MouseButtons> _actionMouseButtons = new Dictionary<T, MouseButtons>();
-
 		private delegate bool KeyTest(Keys key);
 		private delegate bool ButtonTest(Buttons button, PlayerIndex index);
 		private delegate bool MouseButtonTest(MouseButtons mouseButton);

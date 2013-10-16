@@ -7,12 +7,6 @@ namespace XnaGameLib
 {
 	public static class AnimationHelper
 	{
-		public enum Order
-		{
-			Row,
-			Column
-		}
-
 		public static Animation CreateAnimation(Texture2D texture, int rows, int columns,
 		                                        int frames, TimeSpan timePerFrame, Order order)
 		{
@@ -45,6 +39,12 @@ namespace XnaGameLib
 			}
 
 			return new Animation(keyFrames);
+		}
+
+		public enum Order
+		{
+			Row,
+			Column
 		}
 	}
 }

@@ -12,6 +12,7 @@ namespace XnaGameLib
 		public Vector2 TextureOrigin { get; set; }
 		public Vector2 Scale { get; set; }
 		public float Depth { get; set; }
+
 		private Dictionary<T, Animation> _animations;
 		private Animation _currentAnimation;
 
@@ -71,4 +72,3 @@ namespace XnaGameLib
 		}
 	}
 }
-

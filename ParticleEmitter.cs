@@ -16,13 +16,10 @@ namespace XnaGameLib
         public List<Texture2D> Textures { get; set; }
         public Vector2 TextureOriginOffset { get; set; }
         public bool UseTextureCenterAsOrigin { get; set; }
-
         public float EmissionRate { get; set; }
         public float EmissionAcceleration { get; set; }
         public float MaxEmissionRate { get; set; }
-
         public float ConeAngle { get; set; }
-
         public float MinInitialSpeed { get; set; }
         public float MaxInitialSpeed { get; set; }
         public float MinAccelerationMagnitude { get; set; }
@@ -30,25 +27,19 @@ namespace XnaGameLib
         public float MinInitialAngularVelocity { get; set; }
         public float MaxInitialAngularVelocity { get; set; }
         public float MinAngularAcceleration { get; set; }
-        public float MaxAngularAcceleration { get; set; }
-
+		public float MaxAngularAcceleration { get; set; }
         public double MinTtl { get; set; }
         public double MaxTtl { get; set; }
 
         public ParticleEmitter(List<Texture2D> textures)
         {
-            _particles = new List<Particle>();
-
             Textures = textures;
             TextureOriginOffset = Vector2.Zero;
             UseTextureCenterAsOrigin = true;
-
             EmissionRate = 50f / 1000;
             EmissionAcceleration = 0;
             MaxEmissionRate = 100f / 1000;
-
             ConeAngle = MathHelper.TwoPi;
-
             MinInitialSpeed = 50f / 1000;
             MaxInitialSpeed = 50f / 1000; 
             MinAccelerationMagnitude = 0;
@@ -60,6 +51,7 @@ namespace XnaGameLib
             MinTtl = 1000;
             MaxTtl = 1000;
 
+			_particles = new List<Particle>();
             _timeSinceLastEmission = 1f / EmissionRate;
         }
 

@@ -3,32 +3,16 @@ using Microsoft.Xna.Framework;
 
 namespace XnaGameLib
 {
-	public class TimerEventArgs : EventArgs
-	{
-		public TimeSpan ElapsedTime { get; protected set; }
-
-		public TimerEventArgs(TimeSpan elapsedTime)
-		{
-			ElapsedTime = elapsedTime;
-		}
-	}
-
 	public delegate void TimerEventHandler(object sender, TimerEventArgs e);
 
 	public class UpdateTimer : IUpdatable
 	{
-		public enum Type
-		{
-			Once,
-			Repeating
-		}
-
 		public event TimerEventHandler TimerFired;
 
+		private UpdateTimer.Type _type;
 		private long _ticksElapsed;
 		private long _ticksUntilFire;
 		private long _ticksInPeriod;
-		private UpdateTimer.Type _type;
 		private bool _isRunning;
 
 		public UpdateTimer(long ticks, UpdateTimer.Type type, TimerEventHandler timeEventHandler = null)
@@ -88,6 +72,23 @@ namespace XnaGameLib
 			{
 				TimerFired(this, new TimerEventArgs(new TimeSpan(_ticksElapsed)));
 			}
+		}
+
+		public enum Type
+		{
+			Once,
+			Repeating
+		}
+
+	}
+
+	public class TimerEventArgs : EventArgs
+	{
+		public TimeSpan ElapsedTime { get; protected set; }
+
+		public TimerEventArgs(TimeSpan elapsedTime)
+		{
+			ElapsedTime = elapsedTime;
 		}
 	}
 }

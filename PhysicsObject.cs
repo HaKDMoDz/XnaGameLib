@@ -6,15 +6,15 @@ namespace XnaGameLib
 {
     public class PhysicsObject
     {
-        public Vector2 Position { get; set; }
-        private Vector2 _velocity;
-        public Vector2 Acceleration { get; set; }
-        private float _maxSpeed;
-
+		private Vector2 _velocity;
+		private float _maxSpeed;
         private float _angle;
         private float _angularVelocity;
+		private float _maxAngularSpeed;
+
+        public Vector2 Position { get; set; }
+        public Vector2 Acceleration { get; set; }
         public float AngularAcceleration { get; set; }
-        private float _maxAngularSpeed;
 
         public Vector2 Velocity
         {
