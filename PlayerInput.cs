@@ -69,28 +69,21 @@ namespace XnaGameLib
 		                       MouseButtonTest mouseButtonTest, PlayerIndex index = PlayerIndex.One)
 		{
 			Keys key;
-			if (_actionKeys.TryGetValue(action, out key)) {
-				if (keyTest(key)) {
-					return true;
-				}
+			if (_actionKeys.TryGetValue(action, out key) && keyTest(key)) {
+				return true;
 			}
 
 			Buttons button;
-			if (_actionButtons.TryGetValue(action, out button)) {
-				if (buttonTest(button, index)) {
-					return true;
-				}
+			if (_actionButtons.TryGetValue(action, out button) && buttonTest(button, index)) {
+				return true;
 			}
 
 			MouseButtons mouseButton;
-			if (_actionMouseButtons.TryGetValue(action, out mouseButton)) {
-				if (mouseButtonTest(mouseButton)) {
-					return true;
-				}
+			if (_actionMouseButtons.TryGetValue(action, out mouseButton) && mouseButtonTest(mouseButton)) {
+				return true;
 			}
 
 			return false;
 		}
 	}
 }
-
