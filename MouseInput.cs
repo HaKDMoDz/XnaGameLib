@@ -33,22 +33,22 @@ namespace XnaGameLib
 
 		public bool ButtonUp(MouseButtons button)
         {
-			return ButtonIs(button, ButtonState.Released);
+			return ButtonTest(button, ButtonState.Released);
         }
 
 		public bool ButtonDown(MouseButtons button)
         {
-			return ButtonIs(button, ButtonState.Pressed);
+			return ButtonTest(button, ButtonState.Pressed);
         }
 
         public bool ButtonReleased(MouseButtons button)
         {
-			return ButtonIs(button, ButtonState.Pressed, ButtonState.Released);
+			return ButtonTest(button, ButtonState.Pressed, ButtonState.Released);
         }
 
         public bool ButtonPressed(MouseButtons button)
         {
-            return ButtonIs(button, ButtonState.Released, ButtonState.Pressed);
+            return ButtonTest(button, ButtonState.Released, ButtonState.Pressed);
         }
 
 		public void Reset()
@@ -56,7 +56,7 @@ namespace XnaGameLib
 			_lastMouseState = _mouseState;
         }
 
-		private bool ButtonIs(MouseButtons button, ButtonState state)
+		private bool ButtonTest(MouseButtons button, ButtonState state)
 		{
 			switch (button)
 			{
@@ -71,7 +71,7 @@ namespace XnaGameLib
 			}
 		}
 
-		private bool ButtonIs(MouseButtons button, ButtonState lastState, ButtonState state)
+		private bool ButtonTest(MouseButtons button, ButtonState lastState, ButtonState state)
 		{
 			switch (button)
 			{
