@@ -45,22 +45,22 @@ namespace XnaGameLib
 			_mouse.Update(gameTime);
 		}
 
-        public bool InputOn(T action, PlayerIndex index = PlayerIndex.One)
+        public bool InputDown(T action, PlayerIndex index = PlayerIndex.One)
 		{
 			return InputTest(action, _keyboard.KeyDown, _gamePad.ButtonDown, _mouse.ButtonDown, index);
         }
 
-		public bool InputOff(T action, PlayerIndex index = PlayerIndex.One)
+		public bool InputUp(T action, PlayerIndex index = PlayerIndex.One)
         {
 			return InputTest(action, _keyboard.KeyUp, _gamePad.ButtonUp, _mouse.ButtonUp, index);
         }
 
-        public bool InputDeactivated(T action, PlayerIndex index = PlayerIndex.One)
+        public bool InputReleased(T action, PlayerIndex index = PlayerIndex.One)
         {
 			return InputTest(action, _keyboard.KeyReleased, _gamePad.ButtonReleased, _mouse.ButtonReleased, index);
         }
 
-        public bool InputActivated(T action, PlayerIndex index = PlayerIndex.One)
+        public bool InputPressed(T action, PlayerIndex index = PlayerIndex.One)
         {
 			return InputTest(action, _keyboard.KeyPressed, _gamePad.ButtonPressed, _mouse.ButtonPressed, index);
         }
