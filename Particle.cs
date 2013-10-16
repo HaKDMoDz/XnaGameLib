@@ -12,14 +12,6 @@ namespace XnaGameLib
         public Color Tint { get; set; }
         public double TimeToLive { get; set; }
 
-        public bool IsActive
-        {
-            get
-            {
-                return TimeToLive > 0;
-            }
-        }
-
         public Particle(Texture2D texture, Vector2 textureOrigin, Color tint, double timeToLive)
         {
             Texture = texture;
@@ -36,10 +28,15 @@ namespace XnaGameLib
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (IsActive)
+            if (IsActive())
             {
                 spriteBatch.Draw(Texture, Position, Texture.Bounds, Tint, Angle, TextureOrigin, 1, SpriteEffects.None, 0);
             }
+        }
+
+        public bool IsActive()
+        {
+            return TimeToLive > 0;
         }
     }
 }

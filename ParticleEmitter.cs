@@ -111,7 +111,7 @@ namespace XnaGameLib
                 Particle p = _particles[i];
                 p.Update(gameTime);
 
-                if (!p.IsActive)
+                if (!p.IsActive())
                 {
                     _particles.RemoveAt(i);
                 }
