@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace XnaGameLib
 {
-    public class Particle : PhysicsObject
+    public class Particle : PhysicsObject, IDrawable
     {
         public Texture2D Texture { get; set; }
         public Vector2 TextureOrigin { get; set; }

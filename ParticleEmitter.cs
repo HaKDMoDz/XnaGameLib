@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace XnaGameLib
 {
-    public class ParticleEmitter : PhysicsObject
+    public class ParticleEmitter : PhysicsObject, IDrawable
     {
         private static readonly Random _Random = new Random();
 

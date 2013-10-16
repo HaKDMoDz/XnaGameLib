@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace XnaGameLib
 {
-    public class PhysicsObject
+    public class PhysicsObject : IUpdatable
     {
 		private Vector2 _velocity;
 		private float _maxSpeed;
