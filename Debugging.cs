@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace XnaGameLib
 {
-	public static class Debugging
+	public class Debugging
 	{
 		private static Texture2D _BoundingCircleTexture;
 
@@ -17,7 +17,7 @@ namespace XnaGameLib
         }
 
 		[Conditional("DEBUG")]
-		public static void Draw(SpriteBatch spriteBatch, BoundingCircle circle)
+		public void DrawBoundingCircle(SpriteBatch spriteBatch, BoundingCircle circle)
 		{
 			Rectangle textureBounds = _BoundingCircleTexture.Bounds;
 			Vector2 origin = new Vector2(textureBounds.Width / 2, textureBounds.Height / 2);
