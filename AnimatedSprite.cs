@@ -8,6 +8,7 @@ namespace XnaGameLib
 {
 	public class AnimatedSprite<T> : PhysicsObject, IDrawable
 	{
+		public Animation.AnimationState AnimationState { get { return _currentAnimation.State; } }
 		public SpriteEffects Effects { get; set; }
 		public Vector2 TextureOrigin { get; set; }
 		public Vector2 Scale { get; set; }
