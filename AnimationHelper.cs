@@ -8,7 +8,7 @@ namespace XnaGameLib
 	public static class AnimationHelper
 	{
 		public static Animation CreateAnimation(Texture2D texture, int rows, int columns,
-		                                        int frames, TimeSpan timePerFrame, Order order)
+		                                        int frames, TimeSpan frameDuration, Order order)
 		{
 			SpriteSheet sheet = new SpriteSheet(texture, rows, columns);
 			List<KeyFrame> keyFrames = new List<KeyFrame>();
@@ -21,7 +21,7 @@ namespace XnaGameLib
 				{
 					for (int row = 0; row < rows && k < frames; ++row, ++k)
 					{
-						keyFrames.Add(new KeyFrame(texture, sheet[row, col], timePerFrame));
+						keyFrames.Add(new KeyFrame(texture, sheet[row, col], frameDuration));
 					}
 				}
 				break;
@@ -30,7 +30,7 @@ namespace XnaGameLib
 				{
 					for (int col = 0; col < columns && k < frames; ++col, ++k)
 					{
-						keyFrames.Add(new KeyFrame(texture, sheet[row, col], timePerFrame));
+						keyFrames.Add(new KeyFrame(texture, sheet[row, col], frameDuration));
 					}
 				}
 				break;
