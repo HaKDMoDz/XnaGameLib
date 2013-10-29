@@ -79,6 +79,11 @@ namespace XnaGameLib
 			return _keyFrames[_index];
 		}
 
+		public Color[,] FrameData()
+		{
+			return _keyFrames[_index].FrameData();
+		}
+
 		private void TimerFired(object sender, TimerEventArgs args)
 		{
 			long ticksElapsed = args.ElapsedTime.Ticks;
