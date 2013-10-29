@@ -79,9 +79,9 @@ namespace XnaGameLib
 			return _keyFrames[_index];
 		}
 
-		public Color[,] FrameData()
+		public Color[,] TextureData()
 		{
-			return _keyFrames[_index].FrameData();
+			return _keyFrames[_index].TextureData();
 		}
 
 		private void TimerFired(object sender, TimerEventArgs args)

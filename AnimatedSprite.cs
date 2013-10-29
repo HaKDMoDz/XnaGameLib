@@ -72,9 +72,9 @@ namespace XnaGameLib
 			_currentAnimation.Update(gameTime);
 		}
 
-		public Color[,] FrameData()
+		public Color[,] TextureData()
 		{
-			return _currentAnimation.FrameData();
+			return _currentAnimation.TextureData();
 		}
 	}
 }
