@@ -26,11 +26,6 @@ namespace XnaGameLib
 		    Source = source;
 			Duration = duration;
 		}
-
-		public Color[,] TextureData()
-        {
-			return TextureHelper.TextureData(Texture, Source);
-        }
 	}
 }
 

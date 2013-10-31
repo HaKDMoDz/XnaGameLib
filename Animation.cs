@@ -74,14 +74,9 @@ namespace XnaGameLib
 			}
 		}
 
-		public KeyFrame GetCurrentKeyFrame()
+		public KeyFrame CurrentKeyFrame()
 		{
 			return _keyFrames[_index];
-		}
-
-		public Color[,] TextureData()
-		{
-			return _keyFrames[_index].TextureData();
 		}
 
 		private void TimerFired(object sender, TimerEventArgs args)
