@@ -8,9 +8,6 @@ namespace XnaGameLib
 {
 	public class AnimatedSprite<T> : PhysicsObject, IDrawable
 	{
-		private static Dictionary<KeyFrame, byte[,]> _CollisionData = new Dictionary<KeyFrame, byte[,]>();
-
-		public Animation.AnimationState AnimationState { get { return _currentAnimation.State; } }
 		public SpriteEffects Effects { get; set; }
 		public Vector2 TextureOrigin { get; set; }
 		public Vector2 Scale { get; set; }
@@ -74,16 +71,21 @@ namespace XnaGameLib
 			_currentAnimation.Update(gameTime);
 		}
 
-		public byte[,] CollisionData ()
+		public Animation CurrentAnimation()
 		{
-			KeyFrame kf = _currentAnimation.CurrentKeyFrame();
+			return _currentAnimation;
+		}
 
-			if (!_CollisionData.ContainsKey(kf))
+		public Dictionary<KeyFrame, byte[,]> AlphaData()
+		{
+			Dictionary<KeyFrame, byte[,]> alphaData = new Dictionary<KeyFrame, byte[,]>();
+
+			foreach (Animation animation in _animations.Values)
 			{
-				_CollisionData[kf] = TextureHelper.AlphaData(kf.Texture, kf.Source);
+				alphaData.Merge(animation.AlphaData());
 			}
 
-			return _CollisionData[kf];
+			return alphaData;
 		}
 	}
 }

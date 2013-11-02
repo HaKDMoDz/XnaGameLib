@@ -79,6 +79,18 @@ namespace XnaGameLib
 			return _keyFrames[_index];
 		}
 
+		public Dictionary<KeyFrame, byte[,]> AlphaData()
+		{
+			Dictionary<KeyFrame, byte[,]> alphaData = new Dictionary<KeyFrame, byte[,]>();
+
+			foreach (KeyFrame kf in _keyFrames)
+			{
+				alphaData.Add(kf, TextureHelper.AlphaData(kf.Texture, kf.Source));
+			}
+
+			return alphaData;
+		}
+
 		private void TimerFired(object sender, TimerEventArgs args)
 		{
 			long ticksElapsed = args.ElapsedTime.Ticks;
