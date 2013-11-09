@@ -148,5 +148,24 @@ namespace XnaGameLib
 			Vector2 closestPoint = ClosestPointTo(circle.Position);
 			return Vector2.DistanceSquared(closestPoint, circle.Position) < circle.Radius * circle.Radius;
 		}
+
+		public override bool Equals(object other)
+		{
+			if (other != null && other.GetType() == GetType())
+			{
+				AABB aabb = (AABB) other;
+				return aabb.Min == Min && aabb.Max == Max;
+			}
+
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			int result = 17;
+			result = 37 * result + Min.GetHashCode();
+			result = 37 * result + Max.GetHashCode();
+			return result;
+		}
 	}
 }
