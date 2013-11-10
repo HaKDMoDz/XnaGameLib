@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace XnaGameLib
 {
@@ -17,6 +18,7 @@ namespace XnaGameLib
 
 		public UpdateTimer(long ticks, UpdateTimer.Type type, TimerEventHandler timeEventHandler = null)
 		{
+			Debug.Assert(ticks >= 0);
 			_ticksElapsed = 0;
 			_ticksUntilFire = ticks;
 			_ticksInPeriod = ticks;
@@ -48,12 +50,18 @@ namespace XnaGameLib
 						_ticksUntilFire += _ticksInPeriod;
 					} else
 					{
-						_isRunning = false;
+						Stop();
 					}
 
 					OnTimerFired();
 				}
 			}
+		}
+
+		public void Stop()
+		{
+			_isRunning = false;
+			_ticksUntilFire = 0;
 		}
 
 		public bool IsRunning()
@@ -64,6 +72,16 @@ namespace XnaGameLib
 		public bool IsRunningSlowly()
 		{
 			return IsRunning() && _ticksUntilFire <= 0;
+		}
+
+		public TimeSpan TimeLeft()
+		{
+			return new TimeSpan(_ticksUntilFire);
+		}
+
+		public long TicksLeft()
+		{
+			return _ticksUntilFire;
 		}
 
 		private void OnTimerFired()
@@ -79,7 +97,6 @@ namespace XnaGameLib
 			Once,
 			Repeating
 		}
-
 	}
 
 	public class TimerEventArgs : EventArgs
@@ -92,4 +109,3 @@ namespace XnaGameLib
 		}
 	}
 }
-
