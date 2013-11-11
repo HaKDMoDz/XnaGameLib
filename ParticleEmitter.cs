@@ -9,26 +9,41 @@ namespace XnaGameLib
     public class ParticleEmitter : PhysicsObject, IDrawable
     {
         private static readonly Random _Random = new Random();
-
         private List<Particle> _particles;
         private float _timeSinceLastEmission;
 
         public List<Texture2D> Textures { get; set; }
+
         public Vector2 TextureOriginOffset { get; set; }
+
         public bool UseTextureCenterAsOrigin { get; set; }
+
         public float EmissionRate { get; set; }
+
         public float EmissionAcceleration { get; set; }
+
         public float MaxEmissionRate { get; set; }
+
         public float ConeAngle { get; set; }
+
         public float MinInitialSpeed { get; set; }
+
         public float MaxInitialSpeed { get; set; }
+
         public float MinAccelerationMagnitude { get; set; }
+
         public float MaxAccelerationMagnitude { get; set; }
+
         public float MinInitialAngularVelocity { get; set; }
+
         public float MaxInitialAngularVelocity { get; set; }
+
         public float MinAngularAcceleration { get; set; }
-		public float MaxAngularAcceleration { get; set; }
+
+        public float MaxAngularAcceleration { get; set; }
+
         public double MinTtl { get; set; }
+
         public double MaxTtl { get; set; }
 
         public ParticleEmitter(List<Texture2D> textures)
@@ -41,7 +56,7 @@ namespace XnaGameLib
             MaxEmissionRate = 100f / 1000;
             ConeAngle = MathHelper.TwoPi;
             MinInitialSpeed = 50f / 1000;
-            MaxInitialSpeed = 50f / 1000; 
+            MaxInitialSpeed = 50f / 1000;
             MinAccelerationMagnitude = 0;
             MaxAccelerationMagnitude = 0;
             MinInitialAngularVelocity = -MathHelper.TwoPi / 1000;
@@ -51,7 +66,7 @@ namespace XnaGameLib
             MinTtl = 1000;
             MaxTtl = 1000;
 
-			_particles = new List<Particle>();
+            _particles = new List<Particle>();
             _timeSinceLastEmission = 1f / EmissionRate;
         }
 
@@ -87,7 +102,7 @@ namespace XnaGameLib
             //Color tint = new Color(_Random.Next(256), _Random.Next(256), _Random.Next(256));
             double ttl = RandomDouble(MinTtl, MaxTtl);
 
-            Particle p = new Particle(texture, textureOrigin, Color.White, ttl);           
+            Particle p = new Particle(texture, textureOrigin, Color.White, ttl);
 
             // This isn't necessarily something that should be done...possibly make it an option.
             // It makes initial angle of particle the same as the angle of the emitter.

@@ -14,7 +14,7 @@ namespace XnaGameLib
             _lastGamePadStates = new GamePadState[Enum.GetValues(typeof(PlayerIndex)).Length];
             foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex)))
                 _lastGamePadStates[(int)index] = GamePad.GetState(index);
-			_gamePadStates = (GamePadState[]) _lastGamePadStates.Clone();
+            _gamePadStates = (GamePadState[])_lastGamePadStates.Clone();
         }
 
         public GamePadState[] GamePadStates
@@ -28,19 +28,20 @@ namespace XnaGameLib
         }
 
         public void Update(GameTime gameTime)
-		{
-			_lastGamePadStates = (GamePadState[]) _gamePadStates.Clone();
-			foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex))) {
-				_gamePadStates [(int)index] = GamePad.GetState(index);
-			}
+        {
+            _lastGamePadStates = (GamePadState[])_gamePadStates.Clone();
+            foreach (PlayerIndex index in Enum.GetValues(typeof(PlayerIndex)))
+            {
+                _gamePadStates[(int)index] = GamePad.GetState(index);
+            }
         }
 
-		public bool ButtonUp(Buttons button, PlayerIndex index)
+        public bool ButtonUp(Buttons button, PlayerIndex index)
         {
             return _gamePadStates[(int)index].IsButtonUp(button);
         }
 
-		public bool ButtonDown(Buttons button, PlayerIndex index)
+        public bool ButtonDown(Buttons button, PlayerIndex index)
         {
             return _gamePadStates[(int)index].IsButtonDown(button);
         }

@@ -6,86 +6,89 @@ using System.Diagnostics;
 
 namespace XnaGameLib
 {
-	public class AnimatedSprite<T> : PhysicsObject, IDrawable
-	{
-		public SpriteEffects Effects { get; set; }
-		public Vector2 TextureOrigin { get; set; }
-		public Vector2 Scale { get; set; }
-		public float Depth { get; set; }
+    public class AnimatedSprite<T> : PhysicsObject, IDrawable
+    {
+        public SpriteEffects Effects { get; set; }
 
-		private Dictionary<T, Animation> _animations;
-		private Animation _currentAnimation;
+        public Vector2 TextureOrigin { get; set; }
 
-		public AnimatedSprite(Dictionary<T, Animation> animations, T defaultAnimationKey)
-		{
-			Debug.Assert(animations != null);
-			Debug.Assert(animations.ContainsKey(defaultAnimationKey));
-			_animations = animations;
-			_currentAnimation = animations[defaultAnimationKey];
-			Effects = SpriteEffects.None;
-			TextureOrigin = Vector2.Zero;
-			Scale = Vector2.One;
-			Depth = 0;
-		}
+        public Vector2 Scale { get; set; }
 
-		public void Play(T animationKey)
-		{
-			Debug.Assert(_animations.ContainsKey(animationKey));
-			_currentAnimation = _animations[animationKey];
-			_currentAnimation.Play();
-		}
+        public float Depth { get; set; }
 
-		public void Loop(T animationKey, bool randomStartFrame = false)
-		{
-			Debug.Assert(_animations.ContainsKey(animationKey));
-			_currentAnimation = _animations[animationKey];
-			_currentAnimation.Loop(randomStartFrame);
-		}
+        private Dictionary<T, Animation> _animations;
+        private Animation _currentAnimation;
 
-		public void Resume()
-		{
-			_currentAnimation.Resume();
-		}
+        public AnimatedSprite(Dictionary<T, Animation> animations, T defaultAnimationKey)
+        {
+            Debug.Assert(animations != null);
+            Debug.Assert(animations.ContainsKey(defaultAnimationKey));
+            _animations = animations;
+            _currentAnimation = animations[defaultAnimationKey];
+            Effects = SpriteEffects.None;
+            TextureOrigin = Vector2.Zero;
+            Scale = Vector2.One;
+            Depth = 0;
+        }
 
-		public void Pause()
-		{
-			_currentAnimation.Pause();
-		}
+        public void Play(T animationKey)
+        {
+            Debug.Assert(_animations.ContainsKey(animationKey));
+            _currentAnimation = _animations[animationKey];
+            _currentAnimation.Play();
+        }
 
-		public void Stop()
-		{
-			_currentAnimation.Stop();
-		}
+        public void Loop(T animationKey, bool randomStartFrame = false)
+        {
+            Debug.Assert(_animations.ContainsKey(animationKey));
+            _currentAnimation = _animations[animationKey];
+            _currentAnimation.Loop(randomStartFrame);
+        }
 
-		public void Draw(SpriteBatch spriteBatch)
-		{
-			Debug.Assert(spriteBatch != null);
-			KeyFrame kf = _currentAnimation.CurrentKeyFrame();
-			spriteBatch.Draw(kf.Texture, Position, kf.Source, Color.White, Angle, TextureOrigin, Scale, Effects, Depth);
-		}
+        public void Resume()
+        {
+            _currentAnimation.Resume();
+        }
 
-		public override void Update(GameTime gameTime)
-		{
-			Debug.Assert(gameTime != null);
-			base.Update(gameTime);
-			_currentAnimation.Update(gameTime);
-		}
+        public void Pause()
+        {
+            _currentAnimation.Pause();
+        }
 
-		public Animation CurrentAnimation()
-		{
-			return _currentAnimation;
-		}
+        public void Stop()
+        {
+            _currentAnimation.Stop();
+        }
 
-		public Dictionary<KeyFrame, byte[,]> AlphaData()
-		{
-			Dictionary<KeyFrame, byte[,]> alphaData = new Dictionary<KeyFrame, byte[,]>();
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Debug.Assert(spriteBatch != null);
+            KeyFrame kf = _currentAnimation.CurrentKeyFrame();
+            spriteBatch.Draw(kf.Texture, Position, kf.Source, Color.White, Angle, TextureOrigin, Scale, Effects, Depth);
+        }
 
-			foreach (Animation animation in _animations.Values)
-			{
-				alphaData.Merge(animation.AlphaData());
-			}
+        public override void Update(GameTime gameTime)
+        {
+            Debug.Assert(gameTime != null);
+            base.Update(gameTime);
+            _currentAnimation.Update(gameTime);
+        }
 
-			return alphaData;
-		}
-	}
+        public Animation CurrentAnimation()
+        {
+            return _currentAnimation;
+        }
+
+        public Dictionary<KeyFrame, byte[,]> AlphaData()
+        {
+            Dictionary<KeyFrame, byte[,]> alphaData = new Dictionary<KeyFrame, byte[,]>();
+
+            foreach (Animation animation in _animations.Values)
+            {
+                alphaData.Merge(animation.AlphaData());
+            }
+
+            return alphaData;
+        }
+    }
 }

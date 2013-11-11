@@ -5,6 +5,7 @@ namespace XnaGameLib
     public class BoundingCircle
     {
         public Vector2 Position { get; set; }
+
         public float Radius { get; set; }
 
         public BoundingCircle()

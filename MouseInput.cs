@@ -6,13 +6,13 @@ namespace XnaGameLib
 {
     public class MouseInput : IUpdatable
     {
-		private MouseState _mouseState;
-		private MouseState _lastMouseState;
+        private MouseState _mouseState;
+        private MouseState _lastMouseState;
 
         public MouseInput()
         {
-			_lastMouseState = Mouse.GetState();
-			_mouseState = _lastMouseState;
+            _lastMouseState = Mouse.GetState();
+            _mouseState = _lastMouseState;
         }
 
         public MouseState MouseState
@@ -26,24 +26,24 @@ namespace XnaGameLib
         }
 
         public void Update(GameTime gameTime)
-		{
-			_lastMouseState = _mouseState;
-			_mouseState = Mouse.GetState();
-		}
-
-		public bool ButtonUp(MouseButtons button)
         {
-			return ButtonTest(button, ButtonState.Released);
+            _lastMouseState = _mouseState;
+            _mouseState = Mouse.GetState();
         }
 
-		public bool ButtonDown(MouseButtons button)
+        public bool ButtonUp(MouseButtons button)
         {
-			return ButtonTest(button, ButtonState.Pressed);
+            return ButtonTest(button, ButtonState.Released);
+        }
+
+        public bool ButtonDown(MouseButtons button)
+        {
+            return ButtonTest(button, ButtonState.Pressed);
         }
 
         public bool ButtonReleased(MouseButtons button)
         {
-			return ButtonTest(button, ButtonState.Pressed, ButtonState.Released);
+            return ButtonTest(button, ButtonState.Pressed, ButtonState.Released);
         }
 
         public bool ButtonPressed(MouseButtons button)
@@ -51,39 +51,39 @@ namespace XnaGameLib
             return ButtonTest(button, ButtonState.Released, ButtonState.Pressed);
         }
 
-		public void Reset()
+        public void Reset()
         {
-			_lastMouseState = _mouseState;
+            _lastMouseState = _mouseState;
         }
 
-		private bool ButtonTest(MouseButtons button, ButtonState state)
-		{
-			switch (button)
-			{
-			case MouseButtons.LeftButton:
-				return _mouseState.LeftButton == state;
-			case MouseButtons.RightButton:
-				return _mouseState.RightButton == state;
-			case MouseButtons.MiddleButton:
-				return _mouseState.MiddleButton == state;
-			default:
-				return false;
-			}
-		}
+        private bool ButtonTest(MouseButtons button, ButtonState state)
+        {
+            switch (button)
+            {
+            case MouseButtons.LeftButton:
+                return _mouseState.LeftButton == state;
+            case MouseButtons.RightButton:
+                return _mouseState.RightButton == state;
+            case MouseButtons.MiddleButton:
+                return _mouseState.MiddleButton == state;
+            default:
+                return false;
+            }
+        }
 
-		private bool ButtonTest(MouseButtons button, ButtonState lastState, ButtonState state)
-		{
-			switch (button)
-			{
-			case MouseButtons.LeftButton:
-				return _lastMouseState.LeftButton == lastState && _mouseState.LeftButton == state;
-			case MouseButtons.RightButton:
-				return _lastMouseState.RightButton == lastState && _mouseState.RightButton == state;
-			case MouseButtons.MiddleButton:
-				return _lastMouseState.MiddleButton == lastState && _mouseState.MiddleButton == state;
-			default:
-				return false;
-			}
-		}
+        private bool ButtonTest(MouseButtons button, ButtonState lastState, ButtonState state)
+        {
+            switch (button)
+            {
+            case MouseButtons.LeftButton:
+                return _lastMouseState.LeftButton == lastState && _mouseState.LeftButton == state;
+            case MouseButtons.RightButton:
+                return _lastMouseState.RightButton == lastState && _mouseState.RightButton == state;
+            case MouseButtons.MiddleButton:
+                return _lastMouseState.MiddleButton == lastState && _mouseState.MiddleButton == state;
+            default:
+                return false;
+            }
+        }
     }
 }

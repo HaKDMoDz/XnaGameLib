@@ -25,9 +25,9 @@ namespace XnaGameLib
         }
 
         public void Update(GameTime gameTime)
-		{
-			_lastKeyboardState = _keyboardState;
-			_keyboardState = Keyboard.GetState();
+        {
+            _lastKeyboardState = _keyboardState;
+            _keyboardState = Keyboard.GetState();
         }
 
         public bool KeyDown(Keys key)
@@ -35,19 +35,19 @@ namespace XnaGameLib
             return _keyboardState.IsKeyDown(key);
         }
 
-		public bool KeyUp(Keys key)
+        public bool KeyUp(Keys key)
         {
             return _keyboardState.IsKeyUp(key);
         }
 
         public bool KeyReleased(Keys key)
         {
-			return _lastKeyboardState.IsKeyDown(key) && _keyboardState.IsKeyUp(key);
+            return _lastKeyboardState.IsKeyDown(key) && _keyboardState.IsKeyUp(key);
         }
 
         public bool KeyPressed(Keys key)
         {
-			return _lastKeyboardState.IsKeyUp(key) && _keyboardState.IsKeyDown(key);
+            return _lastKeyboardState.IsKeyUp(key) && _keyboardState.IsKeyDown(key);
         }
     }
 }

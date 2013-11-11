@@ -8,8 +8,11 @@ namespace XnaGameLib
     public class Particle : PhysicsObject, IDrawable
     {
         public Texture2D Texture { get; set; }
+
         public Vector2 TextureOrigin { get; set; }
+
         public Color Tint { get; set; }
+
         public double TimeToLive { get; set; }
 
         public Particle(Texture2D texture, Vector2 textureOrigin, Color tint, double timeToLive)
@@ -17,7 +20,7 @@ namespace XnaGameLib
             Texture = texture;
             TextureOrigin = textureOrigin;
             Tint = tint;
-            TimeToLive = timeToLive;       
+            TimeToLive = timeToLive;
         }
 
         public override void Update(GameTime gameTime)

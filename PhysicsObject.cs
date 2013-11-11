@@ -6,14 +6,16 @@ namespace XnaGameLib
 {
     public class PhysicsObject : IUpdatable
     {
-		private Vector2 _velocity;
-		private float _maxSpeed;
+        private Vector2 _velocity;
+        private float _maxSpeed;
         private float _angle;
         private float _angularVelocity;
-		private float _maxAngularSpeed;
+        private float _maxAngularSpeed;
 
         public Vector2 Position { get; set; }
+
         public Vector2 Acceleration { get; set; }
+
         public float AngularAcceleration { get; set; }
 
         public Vector2 Velocity
@@ -22,7 +24,7 @@ namespace XnaGameLib
 
             set
             {
-				Debug.Assert(value.Length() <= MaxSpeed);
+                Debug.Assert(value.Length() <= MaxSpeed);
                 _velocity = value;
             }
         }
@@ -67,8 +69,14 @@ namespace XnaGameLib
             set
             {
                 _angle = value;
-                while (_angle < 0) _angle += MathHelper.TwoPi;
-                while (_angle >= MathHelper.TwoPi) _angle -= MathHelper.TwoPi;
+                while (_angle < 0)
+                {
+                    _angle += MathHelper.TwoPi;
+                }
+                while (_angle >= MathHelper.TwoPi)
+                {
+                    _angle -= MathHelper.TwoPi;
+                }
             }
         }
 
@@ -105,7 +113,7 @@ namespace XnaGameLib
 
         public virtual void Update(GameTime gameTime)
         {
-            float dt = (float) gameTime.ElapsedGameTime.TotalMilliseconds;
+            float dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             Vector2 initialVelocity = Velocity;
             _velocity += Acceleration * dt;
@@ -127,7 +135,7 @@ namespace XnaGameLib
             float speedSquared = _velocity.LengthSquared();
             if (speedSquared > MaxSpeed * MaxSpeed)
             {
-                _velocity *= MaxSpeed / (float) Math.Sqrt(speedSquared);
+                _velocity *= MaxSpeed / (float)Math.Sqrt(speedSquared);
             }
         }
 
