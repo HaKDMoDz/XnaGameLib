@@ -15,6 +15,15 @@ namespace XnaGameLib
 				}
 			}
 		}
+
+		public static float NextFloat(this Random random, float min, float max)
+		{
+			return min + (float) (random.NextDouble() * (max - min));
+		}
+
+		public static float NextDouble(this Random random, double min, double max)
+		{
+			return min + random.NextDouble() * (max - min);
+		}
 	}
 }
-
