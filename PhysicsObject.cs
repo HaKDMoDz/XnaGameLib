@@ -84,7 +84,7 @@ namespace XnaGameLib
         {
             get
             {
-                return new Vector2((float)Math.Cos(Angle), (float)Math.Sin(Angle));
+                return Vectors.Vector2FromAngle(Angle);
             }
 
             set
