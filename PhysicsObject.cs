@@ -12,13 +12,13 @@ namespace XnaGameLib
         private float _angularVelocity;
         private float _maxAngularSpeed;
 
-        public Vector2 Position { get; set; }
+        public virtual Vector2 Position { get; set; }
 
-        public Vector2 Acceleration { get; set; }
+        public virtual Vector2 Acceleration { get; set; }
 
-        public float AngularAcceleration { get; set; }
+        public virtual float AngularAcceleration { get; set; }
 
-        public Vector2 Velocity
+        public virtual Vector2 Velocity
         {
             get { return _velocity; }
 
@@ -29,7 +29,7 @@ namespace XnaGameLib
             }
         }
 
-        public float MaxSpeed
+        public virtual float MaxSpeed
         {
             get { return _maxSpeed; }
 
@@ -40,7 +40,7 @@ namespace XnaGameLib
             }
         }
 
-        public float AngularVelocity
+        public virtual float AngularVelocity
         {
             get { return _angularVelocity; }
 
@@ -51,7 +51,7 @@ namespace XnaGameLib
             }
         }
 
-        public float MaxAngularSpeed
+        public virtual float MaxAngularSpeed
         {
             get { return _maxAngularSpeed; }
 
@@ -62,7 +62,7 @@ namespace XnaGameLib
             }
         }
 
-        public float Angle
+        public virtual float Angle
         {
             get { return _angle; }
 
@@ -80,7 +80,7 @@ namespace XnaGameLib
             }
         }
 
-        public Vector2 Orientation
+        public virtual Vector2 Orientation
         {
             get
             {
