@@ -64,6 +64,27 @@ namespace XnaGameLib
             return direction;
         }
 
+        public static Vector2 Wrap(Vector2 value, Rectangle extent)
+        {
+            while (value.X < extent.X)
+            {
+                value.X += extent.Width;
+            }
+            while (value.X >= extent.X + extent.Width)
+            {
+                value.X -= extent.Width;
+            }
+            while (value.Y < extent.Y)
+            {
+                value.Y += extent.Height;
+            }
+            while (value.Y >= extent.Y + extent.Height)
+            {
+                value.Y -= extent.Height;
+            }
+            return value;
+        }
+
         public enum ScreenState
         {
             Off,
