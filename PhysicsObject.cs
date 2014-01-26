@@ -6,17 +6,32 @@ namespace XnaGameLib
 {
     public class PhysicsObject : IUpdatable
     {
+        private Vector2 _position;
+        private Vector2 _acceleration;
+        private float _angularAcceleration;
         private Vector2 _velocity;
         private float _maxSpeed;
         private float _angle;
         private float _angularVelocity;
         private float _maxAngularSpeed;
 
-        public virtual Vector2 Position { get; set; }
+        public virtual Vector2 Position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
 
-        public virtual Vector2 Acceleration { get; set; }
+        public virtual Vector2 Acceleration
+        {
+            get { return _acceleration; }
+            set { _acceleration = value; }
+        }
 
-        public virtual float AngularAcceleration { get; set; }
+        public virtual float AngularAcceleration
+        {
+            get { return _angularAcceleration; }
+            set { _angularAcceleration = value; }
+        }
 
         public virtual Vector2 Velocity
         {
@@ -100,15 +115,14 @@ namespace XnaGameLib
 
         public PhysicsObject()
         {
-            Position = Vector2.Zero;
-            Velocity = Vector2.Zero;
-            Acceleration = Vector2.Zero;
-            MaxSpeed = float.MaxValue;
-
-            Angle = 0;
-            AngularVelocity = 0;
-            AngularAcceleration = 0;
-            MaxAngularSpeed = float.MaxValue;
+            _position = Vector2.Zero;
+            _velocity = Vector2.Zero;
+            _acceleration = Vector2.Zero;
+            _maxSpeed = float.MaxValue;
+            _angle = 0;
+            _angularVelocity = 0;
+            _angularAcceleration = 0;
+            _maxAngularSpeed = float.MaxValue;
         }
 
         public virtual void Update(GameTime gameTime)
