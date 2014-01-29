@@ -55,6 +55,29 @@ namespace XnaGameLib
             return onScreenPosition + offset;
         }
 
+        public static Vector2 RandomJustOffscreenPosition(Rectangle extent, BoundingCircle bounds)
+        {
+            Vector2 position = Vector2.Zero;
+            float diameter = 2 * bounds.Radius + 10;
+            int random1 = _Random.Next(2);
+            int random2 = _Random.Next(2);
+
+            if (random1 == 0)
+            {
+                // Make position offscreen from left/right.
+                position.X = extent.Left - diameter + random2 * (extent.Width + 2 * diameter);
+                position.Y = _Random.NextFloat(extent.Top - diameter, extent.Bottom + diameter);
+            }
+            else
+            {
+                // Make position offscreen from top/bottom.
+                position.X = _Random.NextFloat(extent.Left - diameter, extent.Right + diameter);
+                position.Y = extent.Top - diameter + random2 * (extent.Height + 2 * diameter);
+            }
+            Console.Write(position);
+            return position;
+        }
+
         public static Vector2 OnscreenDirection(Rectangle extent, BoundingCircle bounds)
         {
             // Calculate the normalized vector from current position to onscreen position.
