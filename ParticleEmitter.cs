@@ -18,6 +18,12 @@ namespace XnaGameLib
 
         public bool UseTextureCenterAsOrigin { get; set; }
 
+        public Vector2 Scale { get; set; }
+
+        public Color Tint { get; set; }
+
+        public bool UseRandomTint { get; set; }
+
         public float EmissionRate { get; set; }
 
         public float EmissionAcceleration { get; set; }
@@ -51,6 +57,9 @@ namespace XnaGameLib
             Textures = textures;
             TextureOriginOffset = Vector2.Zero;
             UseTextureCenterAsOrigin = true;
+            Scale = Vector2.One;
+            Tint = Color.White;
+            UseRandomTint = false;
             EmissionRate = 50f / 1000;
             EmissionAcceleration = 0;
             MaxEmissionRate = 100f / 1000;
@@ -99,10 +108,10 @@ namespace XnaGameLib
         {
             Texture2D texture = Textures[_Random.Next(Textures.Count)];
             Vector2 textureOrigin = UseTextureCenterAsOrigin ? new Vector2(texture.Width / 2, texture.Height / 2) : TextureOriginOffset;
-            //Color tint = new Color(_Random.Next(256), _Random.Next(256), _Random.Next(256));
+            Color tint = UseRandomTint ? new Color(_Random.Next(256), _Random.Next(256), _Random.Next(256)) : Tint;
             double ttl = RandomDouble(MinTtl, MaxTtl);
 
-            Particle p = new Particle(texture, textureOrigin, Color.White, ttl);
+            Particle p = new Particle(texture, textureOrigin, Scale, tint, ttl);
 
             // This isn't necessarily something that should be done...possibly make it an option.
             // It makes initial angle of particle the same as the angle of the emitter.

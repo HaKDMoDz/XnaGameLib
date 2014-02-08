@@ -11,14 +11,18 @@ namespace XnaGameLib
 
         public Vector2 TextureOrigin { get; set; }
 
+        public Vector2 Scale { get; set; }
+
         public Color Tint { get; set; }
 
         public double TimeToLive { get; set; }
 
-        public Particle(Texture2D texture, Vector2 textureOrigin, Color tint, double timeToLive)
+        public Particle(Texture2D texture, Vector2 textureOrigin,
+                        Vector2 scale, Color tint, double timeToLive)
         {
             Texture = texture;
             TextureOrigin = textureOrigin;
+            Scale = scale;
             Tint = tint;
             TimeToLive = timeToLive;
         }
@@ -33,7 +37,7 @@ namespace XnaGameLib
         {
             if (IsActive())
             {
-                spriteBatch.Draw(Texture, Position, Texture.Bounds, Tint, Angle, TextureOrigin, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(Texture, Position, Texture.Bounds, Tint, Angle, TextureOrigin, Scale, SpriteEffects.None, 0);
             }
         }
 
