@@ -74,7 +74,7 @@ namespace XnaGameLib
                 position.X = _Random.NextFloat(extent.Left - diameter, extent.Right + diameter);
                 position.Y = extent.Top - diameter + random2 * (extent.Height + 2 * diameter);
             }
-            Console.Write(position);
+
             return position;
         }
 
